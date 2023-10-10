@@ -31,9 +31,9 @@ def download_and_import_csv():
                     Recipe.objects.create(
                         title=row["Title"],
                         ingredients=row["Ingredients"],
+                        ingredients_set=row["Ingredients_Set"],
                         instructions=row["Instructions"],
                         image_name=row["Image_Name"],
-                        ingredients_set="",
                     )
                 except Exception:
                     print(f"Error creating Recipe")
