@@ -4,7 +4,7 @@ import json
 from decouple import config
 
 # load JSON of indexed ingredients
-with open(config("LOCAL_INGREDIENTS_EXPORT_JSON"), "r") as json_file:
+with open(config("LOCAL_ALL_INGREDIENTS_EXPORT_JSON"), "r") as json_file:
     indexed_ingredients = json.load(json_file)
 
 

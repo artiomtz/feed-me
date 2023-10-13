@@ -13,21 +13,28 @@ with open(config("LOCAL_INGREDIENTS"), "r") as json_file:
     data = json.load(json_file)
 
 unique_ingredients = set()
-
-for recipe in data:
-    ingredients = recipe.get("ingredients", [])
-    unique_ingredients.update(ingredients)
+unique_ingredients_filtered = set()
 
 # clean and sort
-unique_ingredients = {ingredient.lower() for ingredient in unique_ingredients}
-unique_ingredients = [
-    ingredient for ingredient in unique_ingredients if is_valid_ingredient(ingredient)
-]
+for recipe in data:
+    ingredients = recipe.get("ingredients", [])
+    for ingredient in ingredients:
+        ingredient = ingredient.lower()
+        if is_valid_ingredient(ingredient):
+            unique_ingredients.add(ingredient)
+            words = ingredient.lower().split()
+            if len(words) == 1:
+                unique_ingredients_filtered.add(ingredient)
+
 unique_ingredients = sorted(unique_ingredients)
+unique_ingredients_filtered = sorted(unique_ingredients_filtered)
 
 # export to txt
-with open(config("LOCAL_INGREDIENTS_EXPORT"), "w") as output_file:
+with open(config("LOCAL_ALL_INGREDIENTS_EXPORT"), "w") as output_file:
     output_file.write("\n".join(unique_ingredients))
+
+with open(config("LOCAL_INGREDIENTS_EXPORT"), "w") as output_file_filtered:
+    output_file_filtered.write("\n".join(unique_ingredients_filtered))
 
 # export to json
 indexed_ingredients = {char: [] for char in "abcdefghijklmnopqrstuvwxyz0123456789"}
@@ -37,7 +44,7 @@ for ingredient in unique_ingredients:
 
 indexed_json = json.dumps(indexed_ingredients, indent=2)
 
-with open(config("LOCAL_INGREDIENTS_EXPORT_JSON"), "w") as json_output_file:
+with open(config("LOCAL_ALL_INGREDIENTS_EXPORT_JSON"), "w") as json_output_file:
     json_output_file.write(indexed_json)
 
 print(f"Found {len(unique_ingredients)} unique ingredients.")
