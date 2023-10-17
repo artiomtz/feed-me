@@ -11,21 +11,20 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = config("SECRET_KEY")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+DEBUG = False
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0zm43@#32n9!p#z=^@()#3m1it=q^g#b3nbjzs0z)o149skf_h"
+ALLOWED_HOSTS = [config("MY_IP"), config("FRONTEND_URL")]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+if config("ENV") == "dev":
+    DEBUG = True
+    ALLOWED_HOSTS.append("127.0.0.1")
 
 
 # Application definition
@@ -84,6 +83,21 @@ DATABASES = {
 }
 
 GRAPHENE = {"SCHEMA": "main_app.schema.schema"}
+
+REDIS_URL = config("REDIS")
+if config("ENV") == "dev":
+    REDIS_URL = config("REDIS_DEV")
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
