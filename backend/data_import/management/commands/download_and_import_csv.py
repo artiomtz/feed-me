@@ -18,7 +18,7 @@ class Command(BaseCommand):
 def download_and_import_csv():
     for i in range(1, num_csvs + 1):
         csv_url = config(f"CLOUDINARY_CSV_{i}")
-        print(f"Initiating importing of CSV {i}")
+        print(f"Initiating importing of CSV {i} out of {num_csvs}")
 
         with urllib.request.urlopen(csv_url) as response:
             csv_data = response.read().decode("utf-8")
