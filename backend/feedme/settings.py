@@ -21,7 +21,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = [config("MY_IP"), config("FRONTEND_URL")]
+ALLOWED_HOSTS = [config("MY_IP"), config("FRONTEND_URL"), config("BACKEND_URL")]
 
 if config("ENV") == "dev":
     DEBUG = True
