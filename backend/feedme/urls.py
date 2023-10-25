@@ -22,5 +22,6 @@ from main_app.views import test_api
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("graphql/", GraphQLView.as_view(graphiql=True)),
+    path("", GraphQLView.as_view(graphiql=False)),
     path("test/", test_api, name="test_api"),
 ]
