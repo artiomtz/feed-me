@@ -8,4 +8,4 @@ python manage.py collectstatic --no-input
 python manage.py makemigrations
 python manage.py migrate
 
-python manage.py data_import/management/commands/download_and_import_csv
+python manage.py download_and_import_csv
