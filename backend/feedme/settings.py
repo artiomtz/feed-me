@@ -26,6 +26,7 @@ ALLOWED_HOSTS = [config("MY_IP"), config("FRONTEND_URL"), config("BACKEND_URL")]
 if config("ENV") == "dev":
     DEBUG = True
     ALLOWED_HOSTS.append("127.0.0.1")
+    print("Running in dev mode")
 
 
 # Application definition

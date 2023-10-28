@@ -22,7 +22,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("graphql/", GraphQLView.as_view(graphiql=True)),
-    path("", csrf_exempt(GraphQLView.as_view(graphiql=False))),
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     path("test/", test_api, name="test_api"),
 ]
