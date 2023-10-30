@@ -35,19 +35,24 @@ def resolve_possible_recipes(self, info, ingredients):
         )
         return []
 
-    cache_key = "feed-me:" + ",".join(cleaned_ingredients)
-    cached_ids = redis_cache.get_cached_data(cache_key)
-
-    if cached_ids is not None:
-        filtered_recipes = Recipe.objects.filter(id__in=cached_ids)
-        print(f"Retrieved {len(filtered_recipes)} matching recipes from cache")
-        return filtered_recipes
+    try:
+        cache_key = "feed-me:" + ",".join(cleaned_ingredients)
+        cached_ids = redis_cache.get_cached_data(cache_key)
+        if cached_ids is not None:
+            filtered_recipes = Recipe.objects.filter(id__in=cached_ids)
+            print(f"Retrieved {len(filtered_recipes)} matching recipes from cache")
+            return filtered_recipes
+    except:
+        print("Couldn't retrieve data from Redis")
 
     filtered_recipes = search_recipes(set(cleaned_ingredients))
     print(f"Found {len(filtered_recipes)} matching recipes")
 
-    unique_ids = set(recipe.id for recipe in filtered_recipes)
-    redis_cache.cache_data(cache_key, list(unique_ids), timeout=REDIS_TIMEOUT)
+    try:
+        unique_ids = set(recipe.id for recipe in filtered_recipes)
+        redis_cache.cache_data(cache_key, list(unique_ids), timeout=REDIS_TIMEOUT)
+    except:
+        print("Could'nt store data to Redis")
 
     return filtered_recipes
 
