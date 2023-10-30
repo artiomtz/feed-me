@@ -33,6 +33,9 @@ if config("ENV") == "dev":
     ALLOWED_HOSTS.append("127.0.0.1")
     print("Running in dev mode")
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 
 # Application definition
 
