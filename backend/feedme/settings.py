@@ -28,13 +28,15 @@ ALLOWED_HOSTS = [
     config("RENDER_EXTERNAL_HOSTNAME"),
 ]
 
+CORS_ALLOWED_ORIGINS = [config("FRONTEND_HOSTNAME")]
+CORS_ALLOW_METHODS = ("GET", "POST")
+
 if config("ENV") == "dev":
     DEBUG = True
     ALLOWED_HOSTS.append("127.0.0.1")
+    ALLOWED_HOSTS.append(config("FRONTEND_DEV_SERVER"))
+    CORS_ALLOWED_ORIGINS.append(config("FRONTEND_DEV_SERVER"))
     print("Running in dev mode")
-
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "graphene_django",
     "data_import",
     "main_app",
@@ -54,6 +57,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
