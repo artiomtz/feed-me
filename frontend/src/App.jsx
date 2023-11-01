@@ -2,9 +2,12 @@ import "bootstrap/dist/css/bootstrap.css";
 // import "bootstrap/dist/js/bootstrap";
 import RecipeContext from "./RecipeContext";
 import React, { useContext, useEffect } from "react";
+import Status from "./components/Status";
+import Recipes from "./components/Recipes";
+import Search from "./components/Search";
 
 function App() {
-  const { recipes, getRecipes } = useContext(RecipeContext);
+  // const { recipes, getRecipes } = useContext(RecipeContext);
 
   // useEffect(() => {
   //   getRecipes();
@@ -14,18 +17,15 @@ function App() {
     <>
       <div className="container text-center">
         <h1 className="p-4">Feed Me</h1>
-        <div>Search</div>
-        <div>Search field</div>
 
-        <h2 className="p-4 pb-1">Results</h2>
-        <div>
-          {recipes.map((recipe) => (
-            <div key={recipe}>{recipe}</div>
-          ))}
-        </div>
+        <div>Search</div>
+        <Search />
+
+        <h2 className="p-4 pb-1">Recipes</h2>
+        <Recipes />
 
         <h3 className="p-4 pb-1">Status</h3>
-        <div>Status field</div>
+        <Status />
       </div>
     </>
   );
