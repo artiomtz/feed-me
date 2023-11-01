@@ -3,17 +3,13 @@ import React, { useState, createContext } from "react";
 export const RecipeContext = createContext();
 
 export function ContextProvider({ children }) {
-  const [recipes, setRecipes] = useState(["recipe 1", "recipe 2"]);
-
-  const getRecipes = () => {
-    return recipes;
-  };
+  const [recipes, setRecipes] = useState([]);
 
   return (
     <RecipeContext.Provider
       value={{
         recipes,
-        getRecipes,
+        setRecipes,
       }}
     >
       {children}

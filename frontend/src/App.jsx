@@ -1,17 +1,15 @@
 import "bootstrap/dist/css/bootstrap.css";
 // import "bootstrap/dist/js/bootstrap";
-import RecipeContext from "./RecipeContext";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Status from "./components/Status";
 import Recipes from "./components/Recipes";
 import Search from "./components/Search";
+import { pingServer } from "./api/rest/apiService";
 
 function App() {
-  // const { recipes, getRecipes } = useContext(RecipeContext);
-
-  // useEffect(() => {
-  //   getRecipes();
-  // }, []);
+  useEffect(() => {
+    pingServer();
+  }, []);
 
   return (
     <>
