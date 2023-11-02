@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dotenv from "dotenv";
-import resolve from "@rollup/plugin-node-resolve";
 
 dotenv.config();
 const isProduction = process.env.NODE_ENV === "production";
@@ -18,10 +17,8 @@ export default defineConfig({
     MAX_INGREDIENTS: `"${process.env.MAX_INGREDIENTS}"`,
     MIN_INGREDIENTS: `"${process.env.MIN_INGREDIENTS}"`,
   },
-  plugins: [react(), resolve()],
+  plugins: [react()],
   build: {
-    rollupOptions: {
-      external: ["graphql"],
-    },
+    chunkSizeWarningLimit: 1000,
   },
 });
