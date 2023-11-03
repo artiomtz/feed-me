@@ -11,7 +11,7 @@ export default function Recipes() {
             <h4>{recipe.title}</h4>
             <img
               // style={imageStyle}
-              src={`https://res.cloudinary.com/dowqphsme/image/upload/feed-me/images/${recipe.imageName}.jpg`}
+              src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
               alt="Recipe image"
             />
             <p>{recipe.ingredients}</p>

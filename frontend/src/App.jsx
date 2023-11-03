@@ -1,14 +1,32 @@
 import "bootstrap/dist/css/bootstrap.css";
 // import "bootstrap/dist/js/bootstrap";
-import React, { useEffect } from "react";
+import RecipeContext from "./RecipeContext";
+import React, { useContext, useEffect, useState } from "react";
 import Status from "./components/Status";
 import Recipes from "./components/Recipes";
 import Search from "./components/Search";
 import { pingServer } from "./api/rest/apiService";
+import { getIngredients } from "./api/rest/apiService";
 
 function App() {
+  const [ingredients, setIngredients] = useState([]);
+  const { loading, setLoading, status, setStatus } = useContext(RecipeContext);
+
+  const fetchIngredients = async () => {
+    const result = await getIngredients();
+    setIngredients(result);
+  };
+
   useEffect(() => {
+    setLoading(true);
+    setStatus("Connecting to server... 🤔");
+    console.log("Connecting to server... 🤔"); ///////////
     pingServer();
+    setStatus("Fetching ingredients... 😃");
+    console.log("Fetching ingredients... 😃"); ///////////
+    fetchIngredients();
+    setStatus("Let's find something to eat! 🤤");
+    setLoading(false);
   }, []);
 
   return (
