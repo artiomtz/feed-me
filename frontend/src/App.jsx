@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 // import "bootstrap/dist/js/bootstrap";
 import RecipeContext from "./RecipeContext";
 import React, { useContext, useEffect, useState } from "react";
@@ -7,10 +7,14 @@ import Recipes from "./components/Recipes";
 import Search from "./components/Search";
 import { pingServer } from "./api/rest/apiService";
 import { getIngredients } from "./api/rest/apiService";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import "./App.css";
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
-  const { loading, setLoading, status, setStatus } = useContext(RecipeContext);
+  const { setIngredients, loading, setLoading, status, setStatus } =
+    useContext(RecipeContext);
 
   const fetchIngredients = async () => {
     const result = await getIngredients();
@@ -31,18 +35,86 @@ function App() {
 
   return (
     <>
-      <div className="container text-center">
-        <h1 className="p-4">Feed Me</h1>
+      <Grid
+        container
+        // rowSpacing={0}
+        // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
+        justifyContent="center"
+        alignItems="center"
+        p={2}
+      >
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          style={{ backgroundColor: "Violet" }}
+          p={6}
+        >
+          <div>Feed Me</div>
+        </Grid>
 
-        <div>Search</div>
-        <Search />
+        <Grid
+          container
+          // rowSpacing={2}
+          // columnSpacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
+          // spacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
+          // justifyContent="center"
+          // alignItems="center"
+          p={4}
+          pr={"5%"}
+          pl={"5%"}
+          // height="70vh"
+          // direction="column"
+          style={{ minHeight: "60vh" }}
+        >
+          <Grid
+            item
+            xs={12}
+            sm={10}
+            md={10}
+            lg={4}
+            xl={4}
+            style={{ backgroundColor: "Tomato" }}
+            p={"3%"}
+            // justifyContent="center"
+          >
+            <div>
+              <div>Search</div>
+              <div className="content">
+                <Search />
+              </div>
+            </div>
+          </Grid>
 
-        <h2 className="p-4 pb-1">Recipes</h2>
-        <Recipes />
+          <Grid
+            item
+            xs={12}
+            sm={10}
+            md={10}
+            lg={8}
+            xl={8}
+            style={{ backgroundColor: "Orange" }}
+            p={"3%"}
+          >
+            <div>
+              <div>Recipes</div>
+              <Recipes />
+            </div>
+          </Grid>
+        </Grid>
 
-        <h3 className="p-4 pb-1">Status</h3>
-        <Status />
-      </div>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          style={{ backgroundColor: "gray" }}
+          p={4}
+          pr={"5%"}
+          pl={"5%"}
+        >
+          <Status />
+        </Grid>
+      </Grid>
     </>
   );
 }

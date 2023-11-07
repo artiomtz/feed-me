@@ -9,9 +9,8 @@ import {
 } from "../api/graphql/graphqlService";
 
 export default function Search() {
-  const [ingredients, setIngredients] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const { setRecipes, loading, setLoading, setStatus } =
+  const { ingredients, setRecipes, loading, setLoading, setStatus } =
     useContext(RecipeContext);
 
   const handleIngredientChange = (event, newIngredients) => {
@@ -40,7 +39,7 @@ export default function Search() {
 
   return (
     <>
-      <Stack spacing={3} sx={{ width: 500 }}>
+      <Stack>
         <Autocomplete
           multiple
           disablePortal
@@ -49,7 +48,7 @@ export default function Search() {
           handleHomeEndKeys
           filterSelectedOptions
           options={ingredients}
-          sx={{ width: 300 }}
+          sx={{ width: "100%" }}
           onChange={handleIngredientChange}
           renderInput={(params) => (
             <TextField {...params} label="Ingredients" placeholder="add more" />
@@ -57,7 +56,6 @@ export default function Search() {
         />
       </Stack>
       <button
-        className="btn btn-primary"
         onClick={() => {
           fetchRecipes();
         }}

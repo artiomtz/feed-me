@@ -1,0 +1,25 @@
+.image {
+  border-radius: 5%;
+  transition: transform 0.2s;
+}
+
+.image:hover {
+  transform: scale(1.1);
+}
+
+.content {
+  padding: 20px;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  padding: 20px;
+  border-radius: 2%;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  /* border: "2px solid #000"; */
+  box-shadow: 20;
+}
