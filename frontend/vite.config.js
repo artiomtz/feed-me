@@ -8,6 +8,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 export default defineConfig({
   define: {
+    DEBUG: isProduction ? false : true,
     SERVER_URL: isProduction
       ? `"${process.env.BACKEND_SERVER}"`
       : `"${process.env.BACKEND_DEV_SERVER}"`,

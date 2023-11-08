@@ -22,16 +22,17 @@ export default function Search() {
   const fetchRecipes = async () => {
     setLoading(true);
     setStatus("Looking for recipes... 🫡");
-    // if (selectedIngredients.length) {
-    //   const recipes = await fetchPossibleRecipes(selectedIngredients);
-    //   setRecipes(recipes.length);
-    // }
-    const recipes = await fetchTestRecipes(); ///////// tmp test
+    let recipes = [];
+
+    if (DEBUG && !selectedIngredients.length) {
+      recipes = await fetchTestRecipes();
+    } else {
+      recipes = await fetchPossibleRecipes(selectedIngredients);
+    }
     setRecipes(recipes);
 
-    // console.log(selectedIngredients.length);
     if (recipes.length) {
-      setStatus("Here's what I found 😋");
+      setStatus(`I found ${recipes.length} recipes 😋`);
     } else {
       setStatus("I couldn't find any recipes with these ingredients 😣");
     }
@@ -70,8 +71,9 @@ export default function Search() {
       </div>
       <ButtonGo
         disabled={
-          selectedIngredients.length < MIN_INGREDIENTS ||
-          selectedIngredients.length > MAX_INGREDIENTS
+          !DEBUG &&
+          (selectedIngredients.length < MIN_INGREDIENTS ||
+            selectedIngredients.length > MAX_INGREDIENTS)
             ? true
             : false
         }
