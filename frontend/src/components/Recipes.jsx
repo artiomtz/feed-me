@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import RecipeContext from "../RecipeContext";
 import RecipeModal from "./RecipeModal";
+import Grid from "@mui/material/Grid";
 
 export default function Recipes() {
   const { recipes } = useContext(RecipeContext);
@@ -14,13 +15,10 @@ export default function Recipes() {
 
   const displayStyle = {
     display: "flex",
-    alignItems: "center",
+    // alignItems: "center",
+    // width: "100%",
     cursor: "pointer",
-  };
-
-  const titleStyle = {
-    fontWeight: "bold",
-    padding: "30px",
+    paddingRight: "40px",
   };
 
   const handleOpenModal = (recipe) => {
@@ -40,17 +38,50 @@ export default function Recipes() {
           <div
             key={recipe.imageName}
             style={displayStyle}
-            className="content"
+            className="entry"
             onClick={() => handleOpenModal(recipe)}
           >
-            <img
-              className="image"
-              src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
-              alt="Recipe image"
-            />
-            <span style={titleStyle}>{recipe.title}</span>
-            {/* <p>{recipe.ingredients}</p> */}
-            {/* <p>{recipe.instructions}</p> */}
+            <Grid
+              container
+              // rowSpacing={5}
+              // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
+              // justifyContent="flex-start"
+              alignItems="center"
+              // sx={{ boxShadow: 1 }}
+              // p={2}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={10}
+                md={10}
+                lg={6}
+                xl={5}
+                // style={{ backgroundColor: "Tomato" }}
+                // p={"3%"}
+                // justifyContent="center"
+              >
+                <img
+                  className="image"
+                  src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
+                  alt="Recipe image"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={10}
+                md={10}
+                lg={6}
+                xl={7}
+                // style={{ backgroundColor: "Tomato" }}
+                // p={"3%"}
+                // justifyContent="center"
+                // justifyContent="flex-start"
+              >
+                <div className="food-title">{recipe.title}</div>
+              </Grid>
+            </Grid>
           </div>
         ))}
       </div>

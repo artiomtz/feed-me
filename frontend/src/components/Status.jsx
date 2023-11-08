@@ -8,7 +8,7 @@ export default function Status() {
 
   return (
     <>
-      <div>{status}</div>
+      <div className="status">{status}</div>
       <Box sx={{ width: "100%" }}>
         <LinearProgress
           variant={loading ? "indeterminate" : "determinate"}

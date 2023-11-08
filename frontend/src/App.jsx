@@ -41,7 +41,7 @@ function App() {
         // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
         justifyContent="center"
         alignItems="center"
-        p={2}
+        p={"1%"}
       >
         <Grid
           container
@@ -60,9 +60,9 @@ function App() {
           // spacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
           // justifyContent="center"
           // alignItems="center"
-          p={4}
-          pr={"5%"}
-          pl={"5%"}
+          p={3}
+          pr={"4%"}
+          pl={"4%"}
           // height="70vh"
           // direction="column"
           style={{ minHeight: "60vh" }}
@@ -76,13 +76,14 @@ function App() {
             xl={4}
             style={{ backgroundColor: "Tomato" }}
             p={"3%"}
+            pb={4}
             // justifyContent="center"
           >
             <div>
-              <div>Search</div>
-              <div className="content">
-                <Search />
-              </div>
+              <div className="title">Search</div>
+              {/* <div className="content"> */}
+              <Search />
+              {/* </div> */}
             </div>
           </Grid>
 
@@ -97,8 +98,10 @@ function App() {
             p={"3%"}
           >
             <div>
-              <div>Recipes</div>
+              <div className="title">Recipes</div>
+              {/* <div className="content"> */}
               <Recipes />
+              {/* </div> */}
             </div>
           </Grid>
         </Grid>

@@ -1,14 +1,61 @@
+body {
+  font-family: "Playpen Sans", "Verdana";
+  font-size: 15px;
+}
+
+.title {
+  padding-bottom: 20px;
+  font-family: "Permanent Marker", "Lucida Handwriting";
+  font-size: 30px;
+}
+
+.food-title {
+  padding-left: 20px;
+  padding-bottom: 10px;
+  font-family: "Gluten", "Papyrus";
+  font-size: 25px;
+}
+
+.status {
+  /* font-family: "Gluten"; */
+  font-size: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+/* .content {
+  padding: 20px;
+} */
+
+.search {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.instructions {
+  /* padding-top: 0px; */
+  /* padding-bottom: 30px; */
+  margin: 0px;
+}
+
+.entry {
+  padding-bottom: 20px;
+}
+
 .image {
+  margin: 20px;
   border-radius: 5%;
   transition: transform 0.2s;
+  /* object-fit: cover; */
+  /* height: "400px"; */
+  /* width: "100%"; */
+  /* background-position: "center center"; */
+  max-width: 100%; /* Set a maximum width of 100% of the parent container */
+  height: auto;
 }
 
 .image:hover {
   transform: scale(1.1);
-}
-
-.content {
-  padding: 20px;
 }
 
 .modal {
