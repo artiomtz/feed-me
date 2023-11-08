@@ -3,6 +3,20 @@ body {
   font-size: 15px;
 }
 
+.app-icon {
+  width: 100px;
+}
+
+.link-icon {
+  width: 75px;
+  padding: 10px;
+}
+
+.header {
+  font-family: "Permanent Marker", "Lucida Handwriting";
+  font-size: 60px;
+}
+
 .title {
   padding-bottom: 20px;
   font-family: "Permanent Marker", "Lucida Handwriting";
@@ -22,10 +36,6 @@ body {
   padding-bottom: 10px;
   text-align: center;
 }
-
-/* .content {
-  padding: 20px;
-} */
 
 .search {
   padding-top: 20px;

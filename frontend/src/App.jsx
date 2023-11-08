@@ -2,6 +2,7 @@
 // import "bootstrap/dist/js/bootstrap";
 import RecipeContext from "./RecipeContext";
 import React, { useContext, useEffect, useState } from "react";
+import Header from "./components/Header";
 import Status from "./components/Status";
 import Recipes from "./components/Recipes";
 import Search from "./components/Search";
@@ -41,16 +42,16 @@ function App() {
         // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
         justifyContent="center"
         alignItems="center"
-        p={"1%"}
+        // p={"1%"}
       >
         <Grid
           container
-          justifyContent="center"
+          // justifyContent="center"
           alignItems="center"
           style={{ backgroundColor: "Violet" }}
-          p={6}
+          p={"1%"}
         >
-          <div>Feed Me</div>
+          <Header />
         </Grid>
 
         <Grid
@@ -58,9 +59,9 @@ function App() {
           // rowSpacing={2}
           // columnSpacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
           // spacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
-          // justifyContent="center"
+          justifyContent="center"
           // alignItems="center"
-          p={3}
+          p={1}
           pr={"4%"}
           pl={"4%"}
           // height="70vh"
@@ -81,9 +82,7 @@ function App() {
           >
             <div>
               <div className="title">Search</div>
-              {/* <div className="content"> */}
               <Search />
-              {/* </div> */}
             </div>
           </Grid>
 
@@ -99,9 +98,7 @@ function App() {
           >
             <div>
               <div className="title">Recipes</div>
-              {/* <div className="content"> */}
               <Recipes />
-              {/* </div> */}
             </div>
           </Grid>
         </Grid>
@@ -111,7 +108,7 @@ function App() {
           justifyContent="center"
           alignItems="center"
           style={{ backgroundColor: "gray" }}
-          p={4}
+          p={3}
           pr={"5%"}
           pl={"5%"}
         >
