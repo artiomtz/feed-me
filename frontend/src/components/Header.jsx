@@ -1,8 +1,8 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import appIcon from "../../public/appIcon.png";
-import madeByIcon from "../../public/madeByIcon.png";
-import githubIcon from "../../public/githubIcon.png";
+import appIcon from "../assets/appIcon.png";
+import madeByIcon from "../assets/madeByIcon.png";
+import githubIcon from "../assets/githubIcon.png";
 
 export default function Header() {
   return (
