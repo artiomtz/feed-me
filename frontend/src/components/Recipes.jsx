@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import RecipeContext from "../RecipeContext";
 import RecipeModal from "./RecipeModal";
+import NoRecipes from "./NoRecipes";
 import Grid from "@mui/material/Grid";
 
 export default function Recipes() {
@@ -34,56 +35,60 @@ export default function Recipes() {
   return (
     <>
       <div style={scrollableStyle}>
-        {recipes.map((recipe) => (
-          <div
-            key={recipe.imageName}
-            style={displayStyle}
-            className="entry"
-            onClick={() => handleOpenModal(recipe)}
-          >
-            <Grid
-              container
-              // rowSpacing={5}
-              // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
-              // justifyContent="flex-start"
-              alignItems="center"
-              // sx={{ boxShadow: 1 }}
-              // p={2}
+        {recipes.length ? (
+          recipes.map((recipe) => (
+            <div
+              key={recipe.imageName}
+              style={displayStyle}
+              className="entry"
+              onClick={() => handleOpenModal(recipe)}
             >
               <Grid
-                item
-                xs={12}
-                sm={10}
-                md={10}
-                lg={6}
-                xl={5}
-                // style={{ backgroundColor: "Tomato" }}
-                // p={"3%"}
-                // justifyContent="center"
-              >
-                <img
-                  className="image"
-                  src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
-                  alt="Recipe image"
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={10}
-                md={10}
-                lg={6}
-                xl={7}
-                // style={{ backgroundColor: "Tomato" }}
-                // p={"3%"}
-                // justifyContent="center"
+                container
+                // rowSpacing={5}
+                // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
                 // justifyContent="flex-start"
+                alignItems="center"
+                // sx={{ boxShadow: 1 }}
+                // p={2}
               >
-                <div className="food-title">{recipe.title}</div>
+                <Grid
+                  item
+                  xs={12}
+                  sm={10}
+                  md={10}
+                  lg={6}
+                  xl={5}
+                  // style={{ backgroundColor: "Tomato" }}
+                  // p={"3%"}
+                  // justifyContent="center"
+                >
+                  <img
+                    className="image"
+                    src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
+                    alt="Recipe image"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={10}
+                  md={10}
+                  lg={6}
+                  xl={7}
+                  // style={{ backgroundColor: "Tomato" }}
+                  // p={"3%"}
+                  // justifyContent="center"
+                  // justifyContent="flex-start"
+                >
+                  <div className="food-title">{recipe.title}</div>
+                </Grid>
               </Grid>
-            </Grid>
-          </div>
-        ))}
+            </div>
+          ))
+        ) : (
+          <NoRecipes />
+        )}
       </div>
       <RecipeModal
         open={openModal}

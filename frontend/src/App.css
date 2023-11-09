@@ -37,6 +37,11 @@ body {
   text-align: center;
 }
 
+.no-recipes {
+  width: 40%;
+  padding: 10px;
+}
+
 .search {
   padding-top: 20px;
   padding-bottom: 20px;
