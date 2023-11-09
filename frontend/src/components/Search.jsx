@@ -50,6 +50,9 @@ export default function Search() {
             ListboxProps={{
               sx: { fontFamily: "Playpen Sans" },
             }}
+            ChipProps={{
+              sx: { fontFamily: "Playpen Sans" },
+            }}
             multiple
             disablePortal
             selectOnFocus
