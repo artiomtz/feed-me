@@ -12,7 +12,7 @@ export default function ButtonGo(props) {
           props.onClick();
         }}
       >
-        GO
+        <div className="go-button">GO</div>
       </Button>
     </>
   );

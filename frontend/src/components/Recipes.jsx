@@ -40,7 +40,7 @@ export default function Recipes() {
             <div
               key={recipe.imageName}
               style={displayStyle}
-              className="entry"
+              className="recipe"
               onClick={() => handleOpenModal(recipe)}
             >
               <Grid

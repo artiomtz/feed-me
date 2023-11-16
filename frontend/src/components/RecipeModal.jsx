@@ -4,9 +4,26 @@ import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
-// import CloseIcon from "@mui/icons-material/Close";
 
 export default function RecipeModal({ open, handleClose, recipe }) {
+  const convertIngredientsToArray = (ingredientsString) => {
+    const ingredientsArray = ingredientsString
+      .trim()
+      .replace(/^\[|\]$/g, "")
+      .split(",");
+
+    const finalArray = ingredientsArray.map((ingredient) => {
+      const trimmedIngredient = ingredient.trim().replace(/^['"]|['"]$/g, "");
+      return trimmedIngredient;
+    });
+    return finalArray;
+  };
+
+  const scrollableStyle = {
+    height: "40vh",
+    overflow: "auto",
+  };
+
   if (!recipe) {
     return null;
   }
@@ -31,49 +48,79 @@ export default function RecipeModal({ open, handleClose, recipe }) {
               direction="column"
               justifyContent="center"
               alignItems="center"
-              // sx={{ boxShadow: 1 }}
-              // p={2}
             >
               <Grid
                 container
-                sx={{
-                  // display: "flex",
-                  // alignItems: "center",
-                  justifyContent: "flex-end",
-                }}
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
               >
-                <IconButton
-                  aria-label="close"
-                  onClick={handleClose}
-                  className="modal-content"
+                <Grid
+                  item
+                  xs={12}
+                  sm={1}
+                  md={1}
+                  lg={1}
+                  xl={1}
+                  sx={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
+                  }}
                 >
-                  x
-                </IconButton>
+                  <IconButton
+                    aria-label="close"
+                    onClick={handleClose}
+                    className="modal-content"
+                  >
+                    x
+                  </IconButton>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={10}
+                  md={10}
+                  lg={10}
+                  xl={10}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div className="modal-title">{recipe.title}</div>
+                </Grid>
+
+                <Grid item xs={0} sm={1} md={1} lg={1} xl={1}></Grid>
               </Grid>
               <Grid item>
-                <div className="modal-title">
-                  <h2>{recipe.title}</h2>
-                </div>
+                <img
+                  className="modal-image"
+                  src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
+                  alt="Recipe image"
+                />
               </Grid>
-              <Grid item>
-                <div>
-                  <img
-                    // className="image"
-                    src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
-                    alt="Recipe image"
-                  />
-                </div>
-              </Grid>
-              <Grid item>
-                <div>
-                  <div className="modal-content">{recipe.ingredients}</div>
-                </div>
-              </Grid>
-              <Grid item>
-                <div>
-                  <div className="modal-content">{recipe.instructions}</div>
-                </div>
-              </Grid>
+              <div style={scrollableStyle}>
+                <Grid item>
+                  <div className="modal-content">
+                    <div className="modal-sub-title">Ingredients</div>
+                    {convertIngredientsToArray(recipe.ingredients).map(
+                      (ingredient, key) => (
+                        <ul key={key}>
+                          <li>{ingredient}</li>
+                        </ul>
+                      )
+                    )}
+                  </div>
+                </Grid>
+                <Grid item>
+                  <div className="modal-content">
+                    <div className="modal-sub-title">Instructions</div>
+                    <p>{recipe.instructions}</p>
+                  </div>
+                </Grid>
+              </div>
             </Grid>
           </div>
         </Fade>

@@ -47,13 +47,17 @@ body {
   padding-bottom: 20px;
 }
 
+.go-button {
+  font-family: "Playpen Sans", "Verdana";
+}
+
 .instructions {
   /* padding-top: 0px; */
   /* padding-bottom: 30px; */
   margin: 0px;
 }
 
-.entry {
+.recipe {
   padding-bottom: 20px;
 }
 
@@ -78,20 +82,46 @@ body {
   top: 50%;
   left: 50%;
   width: 70%;
-  height: 80%;
+  min-height: 70%;
+  max-height: 90%;
+  min-width: 50%;
+  max-width: 800px;
   padding: 20px;
   border-radius: 2%;
   background-color: blanchedalmond;
   transform: translate(-50%, -50%);
   /* border: "2px solid #000"; */
-  box-shadow: 20;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  /* overflow-y: auto; */
+}
+
+.modal-image {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* margin: 20px; */
+  width: 100%;
+  /* width: 30vw; */
+  /* height: 320px; */
+  /* object-fit: contain; */
+  /* height: 20vw; */
+  border-radius: 5%;
+  /* transform: scale(1.5); */
 }
 
 .modal-title {
+  /* padding: 0px; */
   /* padding-left: 20px; */
   /* padding-bottom: 10px; */
   font-family: "Gluten", "Papyrus";
-  font-size: 25px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.modal-sub-title {
+  padding-top: 20px;
+  /* padding-bottom: 10px; */
+  font-family: "Gluten", "Papyrus";
+  font-size: 30px;
 }
 
 .modal-content {

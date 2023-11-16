@@ -75,7 +75,8 @@ export default function Search() {
       <ButtonGo
         disabled={
           !DEBUG &&
-          (selectedIngredients.length < MIN_INGREDIENTS ||
+          (loading ||
+            selectedIngredients.length < MIN_INGREDIENTS ||
             selectedIngredients.length > MAX_INGREDIENTS)
             ? true
             : false
