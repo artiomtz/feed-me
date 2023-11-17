@@ -14,24 +14,48 @@ import Grid from "@mui/material/Grid";
 import "./App.css";
 
 function App() {
-  const { setIngredients, loading, setLoading, status, setStatus } =
+  const { setIngredients, loading, setLoading, status, setStatus, pushStatus } =
     useContext(RecipeContext);
 
   const fetchIngredients = async () => {
     const result = await getIngredients();
+    // console.log(result); ///////////
     setIngredients(result);
+    return result.length > 0;
   };
 
   useEffect(() => {
-    setLoading(true);
-    setStatus("Connecting to server... 🤔");
-    console.log("Connecting to server... 🤔"); ///////////
-    pingServer();
-    setStatus("Fetching ingredients... 😃");
-    console.log("Fetching ingredients... 😃"); ///////////
-    fetchIngredients();
-    setStatus("Let's find something to eat! 🤤");
-    setLoading(false);
+    const fetchData = async () => {
+      setLoading(true);
+
+      pushStatus("Connecting to server... 🤔");
+      // console.log("Connecting to server... 🤔"); ///////////
+      // const checkServer = await pingServer()
+      // const x = pingServer();
+      // console.log(x);
+      if (await pingServer()) {
+        pushStatus("Successfully connected to server 😁");
+        pushStatus("Fetching ingredients... 😃");
+      } else {
+        // console.log("Could'nt connect to server 🤕"); ///////////
+        pushStatus("Could'nt connect to server 🤕");
+        return;
+      }
+
+      if (await fetchIngredients()) {
+        pushStatus("Successfully Fetched ingredients 😏");
+        pushStatus("Let's find something to eat! 🤤");
+        setTimeout(() => {
+          setLoading(false);
+        }, 5 * STATUS_SPEED);
+      } else {
+        pushStatus("Could'nt fetch ingredients 😕");
+      }
+    };
+
+    // setLoading(true);
+    fetchData();
+    // setLoading(false);
   }, []);
 
   return (

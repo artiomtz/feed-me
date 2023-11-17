@@ -35,6 +35,9 @@ body {
   font-size: 20px;
   padding-bottom: 10px;
   text-align: center;
+  /* opacity: 0; */
+  /* transition: opacity 0.5s ease-in-out; */
+  /* animation: fadeOut 2s; */
 }
 
 .no-recipes {
@@ -71,6 +74,7 @@ body {
   /* background-position: "center center"; */
   max-width: 100%; /* Set a maximum width of 100% of the parent container */
   height: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .image:hover {
@@ -83,10 +87,11 @@ body {
   left: 50%;
   width: 70%;
   min-height: 70%;
-  max-height: 90%;
+  /* max-height: 90%; */
   min-width: 50%;
   max-width: 800px;
   padding: 20px;
+  /* padding: 2vh; */
   border-radius: 2%;
   background-color: blanchedalmond;
   transform: translate(-50%, -50%);
@@ -96,15 +101,19 @@ body {
 }
 
 .modal-image {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   /* margin: 20px; */
+  /* padding: 50px; */
   width: 100%;
   /* width: 30vw; */
   /* height: 320px; */
   /* object-fit: contain; */
   /* height: 20vw; */
+  height: 100%;
   border-radius: 5%;
+  object-fit: contain;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   /* transform: scale(1.5); */
 }
 
@@ -127,4 +136,18 @@ body {
 .modal-content {
   font-family: "Playpen Sans", "Verdana";
   font-size: 15px;
+  /* overflow-y: auto; */
+}
+
+p.modal-instructions {
+  line-height: 3vh;
+}
+
+.status-message {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.status-message.show {
+  opacity: 1;
 }

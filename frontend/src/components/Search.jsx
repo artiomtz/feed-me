@@ -12,8 +12,14 @@ import {
 
 export default function Search() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const { ingredients, setRecipes, loading, setLoading, setStatus } =
-    useContext(RecipeContext);
+  const {
+    ingredients,
+    setRecipes,
+    loading,
+    setLoading,
+    setStatus,
+    pushStatus,
+  } = useContext(RecipeContext);
 
   const handleIngredientChange = (event, newIngredients) => {
     setSelectedIngredients(newIngredients);
@@ -21,7 +27,7 @@ export default function Search() {
 
   const fetchRecipes = async () => {
     setLoading(true);
-    setStatus("Looking for recipes... 🫡");
+    pushStatus("Looking for recipes... 🫡");
     let recipes = [];
 
     if (DEBUG && !selectedIngredients.length) {
@@ -32,14 +38,17 @@ export default function Search() {
     setRecipes(recipes);
 
     if (recipes.length) {
-      setStatus(`I found ${recipes.length} recipes 😋`);
+      pushStatus(`I found ${recipes.length} recipes 😋`);
     } else {
-      setStatus("I couldn't find any recipes with these ingredients 😣");
+      pushStatus("I couldn't find any recipes with these ingredients 😣");
     }
-    setLoading(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2 * STATUS_SPEED);
   };
 
-  // useEffect(() => {}, []);  😶😁🥲😏😣😯😕🫤😖🤪🤕
+  // useEffect(() => {}, []);  😶🥲😯🫤😖🤪
 
   return (
     <>

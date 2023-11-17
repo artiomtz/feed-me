@@ -6,7 +6,11 @@ export function ContextProvider({ children }) {
   const [ingredients, setIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState([]);
+
+  const pushStatus = (msg) => {
+    setStatus((prevQueue) => [...prevQueue, msg]);
+  };
 
   return (
     <RecipeContext.Provider
@@ -19,6 +23,7 @@ export function ContextProvider({ children }) {
         setLoading,
         status,
         setStatus,
+        pushStatus,
       }}
     >
       {children}

@@ -19,6 +19,7 @@ export default defineConfig({
     CDN_INGREDIENTS: `"${process.env.CDN_INGREDIENTS}"`,
     MAX_INGREDIENTS: `"${process.env.MAX_INGREDIENTS}"`,
     MIN_INGREDIENTS: `"${process.env.MIN_INGREDIENTS}"`,
+    STATUS_SPEED: `"${process.env.STATUS_SPEED}"`,
   },
   plugins: [react(), resolve()],
   build: {

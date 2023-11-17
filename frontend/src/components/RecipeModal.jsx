@@ -8,20 +8,27 @@ import Grid from "@mui/material/Grid";
 export default function RecipeModal({ open, handleClose, recipe }) {
   const convertIngredientsToArray = (ingredientsString) => {
     const ingredientsArray = ingredientsString
-      .trim()
       .replace(/^\[|\]$/g, "")
-      .split(",");
+      .split("',")
+      .map((ingredient) => ingredient.trim().replace(/^['"]|['"]$/g, ""));
 
-    const finalArray = ingredientsArray.map((ingredient) => {
-      const trimmedIngredient = ingredient.trim().replace(/^['"]|['"]$/g, "");
-      return trimmedIngredient;
-    });
-    return finalArray;
+    return ingredientsArray;
   };
 
   const scrollableStyle = {
-    height: "40vh",
+    height: "55vh",
     overflow: "auto",
+    paddingRight: "5px",
+    // margin: "10px",
+  };
+
+  const imageStyle = {
+    // height: "15vh",
+    // Width: "auto",
+    // overflow: "auto",
+    // paddingRight: "5px",
+    // padding: "35px",
+    margin: "20px",
   };
 
   if (!recipe) {
@@ -91,36 +98,50 @@ export default function RecipeModal({ open, handleClose, recipe }) {
                 >
                   <div className="modal-title">{recipe.title}</div>
                 </Grid>
-
                 <Grid item xs={0} sm={1} md={1} lg={1} xl={1}></Grid>
               </Grid>
-              <Grid item>
+              <Grid
+                item
+                // sx={{
+                //   height: "30vh",
+                // }}
+                // style={imageStyle}
+              >
                 <img
                   className="modal-image"
                   src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
                   alt="Recipe image"
                 />
               </Grid>
-              <div style={scrollableStyle}>
-                <Grid item>
-                  <div className="modal-content">
-                    <div className="modal-sub-title">Ingredients</div>
-                    {convertIngredientsToArray(recipe.ingredients).map(
-                      (ingredient, key) => (
-                        <ul key={key}>
-                          <li>{ingredient}</li>
-                        </ul>
-                      )
-                    )}
-                  </div>
-                </Grid>
-                <Grid item>
-                  <div className="modal-content">
-                    <div className="modal-sub-title">Instructions</div>
-                    <p>{recipe.instructions}</p>
-                  </div>
-                </Grid>
-              </div>
+              <Grid
+                container
+                // direction="column"
+                // justifyContent="center"
+                // alignItems="center"
+              >
+                <div style={scrollableStyle}>
+                  <Grid item>
+                    <div className="modal-content">
+                      <div className="modal-sub-title">Ingredients</div>
+                      {convertIngredientsToArray(recipe.ingredients).map(
+                        (ingredient, key) => (
+                          <ul key={key}>
+                            <li>{ingredient}</li>
+                          </ul>
+                        )
+                      )}
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <div className="modal-content">
+                      <div className="modal-sub-title">Instructions</div>
+                      <p className="modal-instructions">
+                        {recipe.instructions}
+                      </p>
+                    </div>
+                  </Grid>
+                </div>
+              </Grid>
             </Grid>
           </div>
         </Fade>
