@@ -17,9 +17,11 @@ export default defineConfig({
       : `"${process.env.BACKEND_DEV_SERVER_TEST}"`,
     CDN_IMAGES: `"${process.env.CDN_IMAGES}"`,
     CDN_INGREDIENTS: `"${process.env.CDN_INGREDIENTS}"`,
+    CDN_BASE_INGREDIENTS: `"${process.env.CDN_BASE_INGREDIENTS}"`,
     MAX_INGREDIENTS: `"${process.env.MAX_INGREDIENTS}"`,
     MIN_INGREDIENTS: `"${process.env.MIN_INGREDIENTS}"`,
-    STATUS_SPEED: `"${process.env.STATUS_SPEED}"`,
+    UI_SPEED: `"${process.env.UI_SPEED}"`,
+    NUM_MSGS: `"${process.env.NUM_MSGS}"`,
   },
   plugins: [react(), resolve()],
   build: {

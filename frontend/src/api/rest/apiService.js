@@ -1,6 +1,6 @@
-export const getIngredients = async () => {
+export const getIngredients = async (url) => {
   try {
-    const response = await fetch(CDN_INGREDIENTS);
+    const response = await fetch(url);
     if (response.ok) {
       const data = await response.text();
       const ingredients = data.split("\n").map((line) => line.trim());
@@ -10,7 +10,6 @@ export const getIngredients = async () => {
       return [];
     }
   } catch (error) {
-    alert("hmm.. I can't find the ingredients :(");
     console.error("Error while connecting to CDN.");
     return [];
   }
@@ -34,8 +33,7 @@ export const pingServer = async () => {
       return false;
     }
   } catch (error) {
-    alert("hmm.. I can't connect to the server :(");
-    console.error("Error while trying to connect to the server:", error);
+    console.error("Error while trying to connect to the server.");
     return false;
   }
 };

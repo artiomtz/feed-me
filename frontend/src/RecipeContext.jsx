@@ -4,6 +4,7 @@ export const RecipeContext = createContext();
 
 export function ContextProvider({ children }) {
   const [ingredients, setIngredients] = useState([]);
+  const [baseIngredients, setBaseIngredients] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState([]);
@@ -17,6 +18,8 @@ export function ContextProvider({ children }) {
       value={{
         ingredients,
         setIngredients,
+        baseIngredients,
+        setBaseIngredients,
         recipes,
         setRecipes,
         loading,

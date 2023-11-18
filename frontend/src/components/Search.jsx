@@ -5,6 +5,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import Instructions from "./Instructions";
 import ButtonGo from "./ButtonGo";
+import ButtonBasics from "./ButtonBasics";
+import { motion, AnimatePresence } from "framer-motion";
+import Grid from "@mui/material/Grid";
 import {
   fetchTestRecipes,
   fetchPossibleRecipes,
@@ -14,6 +17,8 @@ export default function Search() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const {
     ingredients,
+    baseIngredients,
+    setBaseIngredients,
     setRecipes,
     loading,
     setLoading,
@@ -38,17 +43,26 @@ export default function Search() {
     setRecipes(recipes);
 
     if (recipes.length) {
-      pushStatus(`I found ${recipes.length} recipes 😋`);
+      pushStatus(`I found ${recipes.length} recipes! 😋`);
     } else {
-      pushStatus("I couldn't find any recipes with these ingredients 😣");
+      pushStatus("Couldn't find any recipes 😣");
     }
 
     setTimeout(() => {
       setLoading(false);
-    }, 2 * STATUS_SPEED);
+    }, 2 * UI_SPEED);
   };
 
-  // useEffect(() => {}, []);  😶🥲😯🫤😖🤪
+  const addBaseIngredients = () => {
+    const newIngredients = new Set([
+      ...selectedIngredients,
+      ...baseIngredients.filter(
+        (ingredient) => !selectedIngredients.includes(ingredient)
+      ),
+    ]);
+    setSelectedIngredients(Array.from(newIngredients));
+  };
+  // useEffect(() => {}, []);  😶🥲😯😖🤪
 
   return (
     <>
@@ -56,6 +70,8 @@ export default function Search() {
       <div className="search">
         <Stack>
           <Autocomplete
+            // id="autocomplete-field"
+            value={selectedIngredients}
             ListboxProps={{
               sx: { fontFamily: "Playpen Sans" },
             }}
@@ -81,17 +97,28 @@ export default function Search() {
           />
         </Stack>
       </div>
-      <ButtonGo
-        disabled={
-          !DEBUG &&
-          (loading ||
-            selectedIngredients.length < MIN_INGREDIENTS ||
-            selectedIngredients.length > MAX_INGREDIENTS)
-            ? true
-            : false
-        }
-        onClick={fetchRecipes}
-      />
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <ButtonGo
+          disabled={
+            !DEBUG &&
+            (loading ||
+              selectedIngredients.length < MIN_INGREDIENTS ||
+              selectedIngredients.length > MAX_INGREDIENTS)
+              ? true
+              : false
+          }
+          onClick={fetchRecipes}
+        />
+        <ButtonBasics
+          disabled={baseIngredients.length == 0}
+          onClick={addBaseIngredients}
+        />
+      </Grid>
     </>
   );
 }
