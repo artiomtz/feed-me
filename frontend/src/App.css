@@ -18,7 +18,7 @@ body {
 }
 
 .title {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   font-family: "Permanent Marker", "Lucida Handwriting";
   font-size: 30px;
 }
@@ -38,6 +38,7 @@ body {
   /* opacity: 0; */
   /* transition: opacity 0.5s ease-in-out; */
   /* animation: fadeOut 2s; */
+  overflow: hidden;
 }
 
 .no-recipes {
@@ -50,7 +51,7 @@ body {
   padding-bottom: 20px;
 }
 
-.go-button {
+.button {
   font-family: "Playpen Sans", "Verdana";
 }
 
@@ -136,12 +137,12 @@ body {
 .modal-content {
   font-family: "Playpen Sans", "Verdana";
   font-size: 15px;
+  line-height: 3vh;
   /* overflow-y: auto; */
 }
 
-p.modal-instructions {
-  line-height: 3vh;
-}
+/* p.modal-instructions {
+} */
 
 .status-message {
   opacity: 0;
