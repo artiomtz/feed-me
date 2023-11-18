@@ -8,20 +8,32 @@ import Recipes from "./components/Recipes";
 import Search from "./components/Search";
 import { pingServer } from "./api/rest/apiService";
 import { getIngredients } from "./api/rest/apiService";
+import { motion, AnimatePresence } from "framer-motion";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import "./App.css";
 
 function App() {
-  const { setIngredients, loading, setLoading, status, setStatus, pushStatus } =
-    useContext(RecipeContext);
+  const {
+    setIngredients,
+    baseIngredients,
+    setBaseIngredients,
+    loading,
+    setLoading,
+    status,
+    setStatus,
+    pushStatus,
+  } = useContext(RecipeContext);
 
   const fetchIngredients = async () => {
-    const result = await getIngredients();
+    const ingredients = await getIngredients(CDN_INGREDIENTS);
+    const baseIngredients = await getIngredients(CDN_BASE_INGREDIENTS);
     // console.log(result); ///////////
-    setIngredients(result);
-    return result.length > 0;
+    setIngredients(ingredients);
+    setBaseIngredients(baseIngredients);
+    // console.warn(baseIngredients);
+    return ingredients.length > 0;
   };
 
   useEffect(() => {
@@ -34,8 +46,8 @@ function App() {
       // const x = pingServer();
       // console.log(x);
       if (await pingServer()) {
-        pushStatus("Successfully connected to server 😁");
-        pushStatus("Fetching ingredients... 😃");
+        pushStatus("Successfully connected 😁");
+        pushStatus("Fetching ingredients.... 😃");
       } else {
         // console.log("Could'nt connect to server 🤕"); ///////////
         pushStatus("Could'nt connect to server 🤕");
@@ -43,11 +55,11 @@ function App() {
       }
 
       if (await fetchIngredients()) {
-        pushStatus("Successfully Fetched ingredients 😏");
-        pushStatus("Let's find something to eat! 🤤");
+        pushStatus("Fetched the ingredients 😏");
+        pushStatus("Time to cook something! 🤤");
         setTimeout(() => {
           setLoading(false);
-        }, 5 * STATUS_SPEED);
+        }, NUM_MSGS * UI_SPEED);
       } else {
         pushStatus("Could'nt fetch ingredients 😕");
       }
@@ -56,89 +68,126 @@ function App() {
     // setLoading(true);
     fetchData();
     // setLoading(false);
+
+    // document.body.scrollTop = 0;
+    // document.documentElement.scrollTop = 0;
   }, []);
 
   return (
     <>
-      <Grid
-        container
-        // rowSpacing={0}
-        // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
-        justifyContent="center"
-        alignItems="center"
-        // p={"1%"}
+      <motion.div
+        // layout
+        initial={{ opacity: 0, scale: 1, y: [-100, -30] }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 2 }}
       >
         <Grid
           container
-          // justifyContent="center"
-          alignItems="center"
-          style={{ backgroundColor: "Violet" }}
-          p={"1%"}
-        >
-          <Header />
-        </Grid>
-
-        <Grid
-          container
-          // rowSpacing={2}
-          // columnSpacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
-          // spacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
+          // rowSpacing={0}
+          // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
           justifyContent="center"
-          // alignItems="center"
-          p={1}
-          pr={"4%"}
-          pl={"4%"}
-          // height="70vh"
-          // direction="column"
-          style={{ minHeight: "60vh" }}
+          alignItems="center"
+          // p={"1%"}
         >
           <Grid
-            item
-            xs={12}
-            sm={10}
-            md={10}
-            lg={4}
-            xl={4}
-            style={{ backgroundColor: "Tomato" }}
-            p={"3%"}
-            pb={4}
+            container
             // justifyContent="center"
+            alignItems="center"
+            style={{ backgroundColor: "Violet" }}
+            p={"1%"}
           >
-            <div>
-              <div className="title">Search</div>
-              <Search />
-            </div>
+            <Header />
           </Grid>
 
+          <motion.div
+            // layout
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: [0.8, 1], scale: [0.8, 1] }}
+            transition={{ duration: 3 }}
+          >
+            <Grid
+              container
+              // rowSpacing={2}
+              // columnSpacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
+              // spacing={{ xs: 2, sm: 1, md: 3, lg: 2, xl: 3 }}
+              justifyContent="center"
+              // alignItems="center"
+              p={1}
+              pr={"4%"}
+              pl={"4%"}
+              // height="70vh"
+              // direction="column"
+              style={{ minHeight: "60vh" }}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={10}
+                md={10}
+                lg={4}
+                xl={4}
+                style={{ backgroundColor: "Tomato" }}
+                p={"3%"}
+                pb={4}
+                // justifyContent="center"
+              >
+                <motion.div
+                  // layout
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: [0.8, 1], scale: [0.8, 1] }}
+                  transition={{ duration: 2 }}
+                >
+                  <div>
+                    <div className="title">Search</div>
+                    <Search />
+                  </div>
+                </motion.div>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                sm={10}
+                md={10}
+                lg={8}
+                xl={8}
+                style={{ backgroundColor: "Orange" }}
+                p={"3%"}
+              >
+                <motion.div
+                  // layout
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: [0.8, 1], scale: [0.8, 1] }}
+                  transition={{ duration: 2 }}
+                >
+                  <div>
+                    <div className="title">Recipes</div>
+                    <Recipes />
+                  </div>
+                </motion.div>
+              </Grid>
+            </Grid>
+          </motion.div>
+          {/* <motion.div
+            layout
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: [0.8, 1], scale: [0.8, 1] }}
+            transition={{ duration: 3 }}
+          > */}
           <Grid
-            item
-            xs={12}
-            sm={10}
-            md={10}
-            lg={8}
-            xl={8}
-            style={{ backgroundColor: "Orange" }}
-            p={"3%"}
+            container
+            justifyContent="center"
+            alignItems="center"
+            style={{ backgroundColor: "gray" }}
+            p={3}
+            pr={"5%"}
+            pl={"5%"}
           >
-            <div>
-              <div className="title">Recipes</div>
-              <Recipes />
-            </div>
+            <Status />
           </Grid>
+          {/* </motion.div> */}
         </Grid>
-
-        <Grid
-          container
-          justifyContent="center"
-          alignItems="center"
-          style={{ backgroundColor: "gray" }}
-          p={3}
-          pr={"5%"}
-          pl={"5%"}
-        >
-          <Status />
-        </Grid>
-      </Grid>
+      </motion.div>
     </>
   );
 }

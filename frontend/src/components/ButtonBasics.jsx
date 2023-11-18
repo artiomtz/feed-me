@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ButtonGo(props) {
+export default function ButtonBasics(props) {
   return (
     <>
       <Button
@@ -14,7 +14,7 @@ export default function ButtonGo(props) {
         }}
       >
         <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.7 }}>
-          <div className="button">GO</div>
+          <div className="button">Basics</div>
         </motion.div>
       </Button>
     </>

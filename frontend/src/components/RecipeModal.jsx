@@ -3,7 +3,9 @@ import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
+import { motion, AnimatePresence } from "framer-motion";
 import Grid from "@mui/material/Grid";
+import noRecipeImage from "../assets/noRecipeImage.png";
 
 export default function RecipeModal({ open, handleClose, recipe }) {
   const convertIngredientsToArray = (ingredientsString) => {
@@ -37,6 +39,7 @@ export default function RecipeModal({ open, handleClose, recipe }) {
 
   return (
     <>
+      {/* <AnimatePresence> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -48,104 +51,135 @@ export default function RecipeModal({ open, handleClose, recipe }) {
           },
         }}
       >
-        <Fade in={open} timeout={500}>
+        <motion.div
+          layout
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          exit={{
+            scale: 0,
+            opacity: 0,
+            transition: { duration: 1 },
+          }}
+        >
+          {/* <Fade in={open} timeout={500}> */}
           <div className="modal">
-            <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
+            <motion.div
+              layout
+              initial={{ opacity: 0, scale: 1, y: -50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1 }}
             >
               <Grid
                 container
-                direction="row"
+                direction="column"
                 justifyContent="center"
                 alignItems="center"
               >
                 <Grid
-                  item
-                  xs={12}
-                  sm={1}
-                  md={1}
-                  lg={1}
-                  xl={1}
-                  sx={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    justifyContent: "flex-start",
-                  }}
+                  container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
                 >
-                  <IconButton
-                    aria-label="close"
-                    onClick={handleClose}
-                    className="modal-content"
+                  <Grid
+                    item
+                    xs={12}
+                    sm={1}
+                    md={1}
+                    lg={1}
+                    xl={1}
+                    // pb={1}
+                    sx={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "flex-start",
+                    }}
                   >
-                    x
-                  </IconButton>
+                    <IconButton
+                      aria-label="close"
+                      onClick={handleClose}
+                      className="modal-content"
+                    >
+                      x
+                    </IconButton>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={10}
+                    md={10}
+                    lg={10}
+                    xl={10}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div className="modal-title">{recipe.title}</div>
+                  </Grid>
+                  <Grid item xs={0} sm={1} md={1} lg={1} xl={1}></Grid>
                 </Grid>
                 <Grid
                   item
-                  xs={12}
-                  sm={10}
-                  md={10}
-                  lg={10}
-                  xl={10}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
+                  // sx={{
+                  //   height: "30vh",
+                  // }}
+                  // style={imageStyle}
                 >
-                  <div className="modal-title">{recipe.title}</div>
+                  <img
+                    className="modal-image"
+                    src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = noRecipeImage;
+                    }}
+                    alt="No image found 🫤"
+                  />
                 </Grid>
-                <Grid item xs={0} sm={1} md={1} lg={1} xl={1}></Grid>
-              </Grid>
-              <Grid
-                item
-                // sx={{
-                //   height: "30vh",
-                // }}
-                // style={imageStyle}
-              >
-                <img
-                  className="modal-image"
-                  src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
-                  alt="Recipe image"
-                />
-              </Grid>
-              <Grid
-                container
-                // direction="column"
-                // justifyContent="center"
-                // alignItems="center"
-              >
-                <div style={scrollableStyle}>
-                  <Grid item>
-                    <div className="modal-content">
-                      <div className="modal-sub-title">Ingredients</div>
-                      {convertIngredientsToArray(recipe.ingredients).map(
-                        (ingredient, key) => (
-                          <ul key={key}>
-                            <li>{ingredient}</li>
+
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 1, y: -50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 2 }}
+                >
+                  <Grid
+                    container
+                    // direction="column"
+                    // justifyContent="center"
+                    // alignItems="center"
+                  >
+                    <div style={scrollableStyle}>
+                      <Grid item>
+                        <div className="modal-content">
+                          <div className="modal-sub-title">Ingredients</div>
+                          <ul>
+                            {convertIngredientsToArray(recipe.ingredients).map(
+                              (ingredient, key) => (
+                                <li key={key}>{ingredient}</li>
+                              )
+                            )}
                           </ul>
-                        )
-                      )}
+                        </div>
+                      </Grid>
+                      <Grid item>
+                        <div className="modal-content">
+                          <div className="modal-sub-title">Instructions</div>
+                          <p>{recipe.instructions}</p>
+                        </div>
+                      </Grid>
                     </div>
                   </Grid>
-                  <Grid item>
-                    <div className="modal-content">
-                      <div className="modal-sub-title">Instructions</div>
-                      <p className="modal-instructions">
-                        {recipe.instructions}
-                      </p>
-                    </div>
-                  </Grid>
-                </div>
+                </motion.div>
               </Grid>
-            </Grid>
+            </motion.div>
           </div>
-        </Fade>
+          {/* </Fade> */}
+        </motion.div>
       </Modal>
+      {/* </AnimatePresence> */}
     </>
   );
 }

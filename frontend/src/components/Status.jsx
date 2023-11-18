@@ -3,6 +3,7 @@ import RecipeContext from "../RecipeContext";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import Fade from "@mui/material/Fade";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Status() {
   const { status, setStatus, loading } = useContext(RecipeContext);
@@ -16,12 +17,18 @@ export default function Status() {
         }
         return prevQueue;
       });
-    }, STATUS_SPEED);
+    }, UI_SPEED);
   }, []);
 
   return (
     <>
-      <div className="status">{status[0]}</div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.3 }}
+        animate={{ opacity: [0.5, 0.7, 1], scale: [0.7, 1, 0.7, 1, 1] }}
+        transition={{ duration: NUM_MSGS * (UI_SPEED / 1000) }}
+      >
+        <div className="status">{status[0]}</div>
+      </motion.div>
       <Box sx={{ width: "100%" }}>
         <LinearProgress
           variant={loading ? "indeterminate" : "determinate"}
