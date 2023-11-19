@@ -34,8 +34,10 @@ CORS_ALLOW_METHODS = ("GET", "POST")
 if config("ENV") == "dev":
     DEBUG = True
     ALLOWED_HOSTS.append("127.0.0.1")
-    ALLOWED_HOSTS.append(config("FRONTEND_DEV_SERVER"))
-    CORS_ALLOWED_ORIGINS.append(config("FRONTEND_DEV_SERVER"))
+    ALLOWED_HOSTS.append(config("FRONTEND_DEV_SERVER1"))
+    ALLOWED_HOSTS.append(config("FRONTEND_DEV_SERVER2"))
+    CORS_ALLOWED_ORIGINS.append(config("FRONTEND_DEV_SERVER1"))
+    CORS_ALLOWED_ORIGINS.append(config("FRONTEND_DEV_SERVER2"))
     print("Running in dev mode")
 
 

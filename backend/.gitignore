@@ -89,6 +89,7 @@ coverage.xml
 
 # pyenv 
 .python-version 
+activate-venv.sh
 
 # celery 
 celerybeat-schedule.* 
