@@ -50,7 +50,6 @@ export default function Status() {
             border: 3,
             borderRadius: 5,
             p: 1,
-
             backgroundColor: "cornsilk",
             "& .MuiLinearProgress-bar": {
               backgroundColor: "lightblue",

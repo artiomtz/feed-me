@@ -43,9 +43,6 @@ body {
   font-size: 20px;
   padding-bottom: 10px;
   text-align: center;
-  /* opacity: 0; */
-  /* transition: opacity 0.5s ease-in-out; */
-  /* animation: fadeOut 2s; */
   overflow: hidden;
 }
 
@@ -64,8 +61,6 @@ body {
 }
 
 .instructions {
-  /* padding-top: 0px; */
-  /* padding-bottom: 30px; */
   margin: 0px;
 }
 
@@ -77,11 +72,7 @@ body {
   margin: 20px;
   border-radius: 5%;
   transition: transform 0.2s;
-  /* object-fit: cover; */
-  /* height: "400px"; */
-  /* width: "100%"; */
-  /* background-position: "center center"; */
-  max-width: 100%; /* Set a maximum width of 100% of the parent container */
+  max-width: 100%;
   height: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -96,11 +87,9 @@ body {
   left: 50%;
   width: 70%;
   min-height: 70%;
-  /* max-height: 90%; */
   min-width: 50%;
   max-width: 800px;
   padding: 20px;
-  /* padding: 2vh; */
   border-radius: 2%;
   background-image: linear-gradient(
     45deg,
@@ -109,32 +98,20 @@ body {
     lemonchiffon 100%
   );
   transform: translate(-50%, -50%);
-  /* border: "2px solid #000"; */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  /* overflow-y: auto; */
 }
 
 .modal-image {
   margin-top: 30px;
   margin-bottom: 30px;
-  /* margin: 20px; */
-  /* padding: 50px; */
   width: 100%;
-  /* width: 30vw; */
-  /* height: 320px; */
-  /* object-fit: contain; */
-  /* height: 20vw; */
   height: 100%;
   border-radius: 5%;
   object-fit: contain;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  /* transform: scale(1.5); */
 }
 
 .modal-title {
-  /* padding: 0px; */
-  /* padding-left: 20px; */
-  /* padding-bottom: 10px; */
   font-family: "Gluten", "Papyrus";
   font-size: 30px;
   text-align: center;
@@ -142,7 +119,6 @@ body {
 
 .modal-sub-title {
   padding-top: 20px;
-  /* padding-bottom: 10px; */
   font-family: "Gluten", "Papyrus";
   font-size: 30px;
 }
@@ -151,11 +127,7 @@ body {
   font-family: "Playpen Sans", "Verdana";
   font-size: 15px;
   line-height: 3vh;
-  /* overflow-y: auto; */
 }
-
-/* p.modal-instructions {
-} */
 
 .status-message {
   opacity: 0;

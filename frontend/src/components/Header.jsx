@@ -26,9 +26,8 @@ export default function Header() {
             justifyContent: "center",
           }}
         >
-          <img className="app-icon" src={appIcon} alt="App icon" />
+          <img className="app-icon" src={appIcon} alt="App icon 🥲" />
         </Grid>
-
         <Grid
           item
           xs={12}
@@ -44,7 +43,6 @@ export default function Header() {
         >
           <div className="header">Feed Me</div>
         </Grid>
-
         <Grid item xs={12} sm={2} md={1} lg={1} xl={1}>
           <Grid
             container
@@ -57,10 +55,18 @@ export default function Header() {
               target="_blank"
               rel="external"
             >
-              <img className="link-icon" src={githubIcon} alt="App icon" />
+              <img
+                className="link-icon"
+                src={githubIcon}
+                alt="GitHub icon 🥲"
+              />
             </a>
             <a href="http://artiomtsimk.in/" target="_blank" rel="external">
-              <img className="link-icon" src={madeByIcon} alt="App icon" />
+              <img
+                className="link-icon"
+                src={madeByIcon}
+                alt="Made by icon 🥲"
+              />
             </a>
           </Grid>
         </Grid>

@@ -14,11 +14,9 @@ export default function Search() {
   const {
     ingredients,
     baseIngredients,
-    setBaseIngredients,
     setRecipes,
     loading,
     setLoading,
-    setStatus,
     pushStatus,
   } = useContext(RecipeContext);
 
@@ -60,7 +58,6 @@ export default function Search() {
       <div className="search">
         <Stack>
           <Autocomplete
-            // id="autocomplete-field"
             value={selectedIngredients}
             ListboxProps={{
               sx: { fontFamily: "Playpen Sans" },

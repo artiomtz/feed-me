@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import RecipeContext from "../RecipeContext";
 import RecipeModal from "./RecipeModal";
 import NoRecipes from "./NoRecipes";
-import noRecipeImage from "../assets/noRecipeImage.png";
 import Grid from "@mui/material/Grid";
 import { motion, AnimatePresence } from "framer-motion";
+import noRecipeImage from "../assets/noRecipeImage.png";
 
 export default function Recipes() {
   const { recipes } = useContext(RecipeContext);
@@ -18,8 +18,6 @@ export default function Recipes() {
 
   const displayStyle = {
     display: "flex",
-    // alignItems: "center",
-    // width: "100%",
     cursor: "pointer",
     paddingRight: "40px",
   };
@@ -56,26 +54,8 @@ export default function Recipes() {
                   className="recipe"
                   onClick={() => handleOpenModal(recipe)}
                 >
-                  <Grid
-                    container
-                    // rowSpacing={5}
-                    // columnSpacing={{ xs: 1, sm: 1, md: 3, lg: 2, xl: 0 }}
-                    // justifyContent="flex-start"
-                    alignItems="center"
-                    // sx={{ boxShadow: 1 }}
-                    // p={2}
-                  >
-                    <Grid
-                      item
-                      xs={12}
-                      sm={10}
-                      md={10}
-                      lg={6}
-                      xl={5}
-                      // style={{ backgroundColor: "Tomato" }}
-                      // p={"3%"}
-                      // justifyContent="center"
-                    >
+                  <Grid container alignItems="center">
+                    <Grid item xs={12} sm={10} md={10} lg={6} xl={5}>
                       <img
                         className="image"
                         src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
@@ -86,18 +66,7 @@ export default function Recipes() {
                         alt="No image found 🫤"
                       />
                     </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      sm={10}
-                      md={10}
-                      lg={6}
-                      xl={7}
-                      // style={{ backgroundColor: "Tomato" }}
-                      // p={"3%"}
-                      // justifyContent="center"
-                      // justifyContent="flex-start"
-                    >
+                    <Grid item xs={12} sm={10} md={10} lg={6} xl={7}>
                       <div className="food-title">{recipe.title}</div>
                     </Grid>
                   </Grid>

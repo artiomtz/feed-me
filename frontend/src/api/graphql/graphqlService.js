@@ -28,7 +28,3 @@ export async function fetchPossibleRecipes(ingredients) {
     return [];
   }
 }
-
-export async function fetchTestRecipes() {
-  return fetchPossibleRecipes(["salt", "pepper", "chicken"]);
-}

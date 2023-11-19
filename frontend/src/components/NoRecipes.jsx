@@ -5,10 +5,6 @@ import noRecipeIcon from "../assets/noRecipeIcon.png";
 export default function NoRecipes() {
   const displayStyle = {
     height: "100%",
-    // alignItems: "center",
-    // width: "100%",
-    // cursor: "pointer",
-    // paddingRight: "40px",
   };
 
   return (
@@ -28,7 +24,7 @@ export default function NoRecipes() {
             justifyContent: "center",
           }}
         >
-          <img className="no-recipes" src={noRecipeIcon} alt="App icon" />
+          <img className="no-recipes" src={noRecipeIcon} alt="No recipes 😖" />
         </Grid>
         <Grid item>
           <div className="food-title">Nothing yet</div>

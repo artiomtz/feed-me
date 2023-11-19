@@ -1,10 +1,9 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
-import Backdrop from "@mui/material/Backdrop";
-import Fade from "@mui/material/Fade";
-import IconButton from "@mui/material/IconButton";
-import { motion, AnimatePresence } from "framer-motion";
 import Grid from "@mui/material/Grid";
+import Backdrop from "@mui/material/Backdrop";
+import IconButton from "@mui/material/IconButton";
+import { motion } from "framer-motion";
 import noRecipeImage from "../assets/noRecipeImage.png";
 
 export default function RecipeModal({ open, handleClose, recipe }) {
@@ -21,16 +20,6 @@ export default function RecipeModal({ open, handleClose, recipe }) {
     height: "55vh",
     overflow: "auto",
     paddingRight: "5px",
-    // margin: "10px",
-  };
-
-  const imageStyle = {
-    // height: "15vh",
-    // Width: "auto",
-    // overflow: "auto",
-    // paddingRight: "5px",
-    // padding: "35px",
-    margin: "20px",
   };
 
   if (!recipe) {
@@ -39,7 +28,6 @@ export default function RecipeModal({ open, handleClose, recipe }) {
 
   return (
     <>
-      {/* <AnimatePresence> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -62,7 +50,6 @@ export default function RecipeModal({ open, handleClose, recipe }) {
             transition: { duration: 1 },
           }}
         >
-          {/* <Fade in={open} timeout={500}> */}
           <div className="modal">
             <motion.div
               layout
@@ -89,7 +76,6 @@ export default function RecipeModal({ open, handleClose, recipe }) {
                     md={1}
                     lg={1}
                     xl={1}
-                    // pb={1}
                     sx={{
                       display: "flex",
                       alignItems: "flex-start",
@@ -121,13 +107,7 @@ export default function RecipeModal({ open, handleClose, recipe }) {
                   </Grid>
                   <Grid item xs={0} sm={1} md={1} lg={1} xl={1}></Grid>
                 </Grid>
-                <Grid
-                  item
-                  // sx={{
-                  //   height: "30vh",
-                  // }}
-                  // style={imageStyle}
-                >
+                <Grid item>
                   <img
                     className="modal-image"
                     src={`${CDN_IMAGES}${recipe.imageName}.jpg`}
@@ -135,22 +115,16 @@ export default function RecipeModal({ open, handleClose, recipe }) {
                       currentTarget.onerror = null;
                       currentTarget.src = noRecipeImage;
                     }}
-                    alt="No image found 🫤"
+                    alt="No image found 😶"
                   />
                 </Grid>
-
                 <motion.div
                   layout
                   initial={{ opacity: 0, scale: 1, y: -50 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 2 }}
                 >
-                  <Grid
-                    container
-                    // direction="column"
-                    // justifyContent="center"
-                    // alignItems="center"
-                  >
+                  <Grid container>
                     <div style={scrollableStyle}>
                       <Grid item>
                         <div className="modal-content">
@@ -176,10 +150,8 @@ export default function RecipeModal({ open, handleClose, recipe }) {
               </Grid>
             </motion.div>
           </div>
-          {/* </Fade> */}
         </motion.div>
       </Modal>
-      {/* </AnimatePresence> */}
     </>
   );
 }
