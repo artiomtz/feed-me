@@ -126,7 +126,7 @@ body {
 .modal-content {
   font-family: "Playpen Sans", "Verdana";
   font-size: 15px;
-  line-height: 3vh;
+  line-height: 30px;
 }
 
 .status-message {
