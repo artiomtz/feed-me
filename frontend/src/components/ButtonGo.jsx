@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function ButtonGo(props) {
   return (
@@ -11,6 +11,12 @@ export default function ButtonGo(props) {
         disabled={props.disabled}
         onClick={() => {
           props.onClick();
+        }}
+        sx={{
+          color: "lavender",
+          boxShadow: 5,
+          border: 5,
+          borderRadius: 5,
         }}
       >
         <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.7 }}>

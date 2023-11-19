@@ -1,17 +1,13 @@
-// import "bootstrap/dist/css/bootstrap.css";
-// import "bootstrap/dist/js/bootstrap";
+import React, { useContext, useEffect } from "react";
+import { pingServer } from "./api/rest/apiService";
+import { getIngredients } from "./api/rest/apiService";
 import RecipeContext from "./RecipeContext";
-import React, { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Status from "./components/Status";
 import Recipes from "./components/Recipes";
 import Search from "./components/Search";
-import { pingServer } from "./api/rest/apiService";
-import { getIngredients } from "./api/rest/apiService";
-import { motion, AnimatePresence } from "framer-motion";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import { motion } from "framer-motion";
 import "./App.css";
 
 function App() {
@@ -93,8 +89,14 @@ function App() {
             container
             // justifyContent="center"
             alignItems="center"
-            style={{ backgroundColor: "Violet" }}
-            p={"1%"}
+            // style={{ backgroundColor: "Violet" }}
+            // p={"1%"}
+            m={"1%"}
+            mt={0}
+            sx={{
+              boxShadow: 10,
+              borderRadius: 5,
+            }}
           >
             <Header />
           </Grid>
@@ -126,10 +128,14 @@ function App() {
                 md={10}
                 lg={4}
                 xl={4}
-                style={{ backgroundColor: "Tomato" }}
+                // style={{ backgroundColor: "Tomato", marginLeft: "10px" }}
                 p={"3%"}
+                // pt={4}
                 pb={4}
-                // justifyContent="center"
+                sx={{
+                  boxShadow: 10,
+                  borderRadius: 5,
+                }}
               >
                 <motion.div
                   // layout
@@ -144,16 +150,7 @@ function App() {
                 </motion.div>
               </Grid>
 
-              <Grid
-                item
-                xs={12}
-                sm={10}
-                md={10}
-                lg={8}
-                xl={8}
-                style={{ backgroundColor: "Orange" }}
-                p={"3%"}
-              >
+              <Grid item xs={12} sm={10} md={10} lg={8} xl={8} p={"3%"}>
                 <motion.div
                   // layout
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -178,7 +175,7 @@ function App() {
             container
             justifyContent="center"
             alignItems="center"
-            style={{ backgroundColor: "gray" }}
+            // style={{ backgroundColor: "gray" }}
             p={3}
             pr={"5%"}
             pl={"5%"}

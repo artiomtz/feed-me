@@ -1,6 +1,14 @@
 body {
   font-family: "Playpen Sans", "Verdana";
   font-size: 15px;
+  background: no-repeat center center fixed;
+  background-image: linear-gradient(
+    45deg,
+    wheat 0%,
+    lavender 50%,
+    lemonchiffon 100%
+  );
+  color: darkslategrey;
 }
 
 .app-icon {
@@ -31,7 +39,7 @@ body {
 }
 
 .status {
-  /* font-family: "Gluten"; */
+  font-family: "Gluten";
   font-size: 20px;
   padding-bottom: 10px;
   text-align: center;
@@ -94,7 +102,12 @@ body {
   padding: 20px;
   /* padding: 2vh; */
   border-radius: 2%;
-  background-color: blanchedalmond;
+  background-image: linear-gradient(
+    45deg,
+    wheat 0%,
+    lavender 50%,
+    lemonchiffon 100%
+  );
   transform: translate(-50%, -50%);
   /* border: "2px solid #000"; */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);

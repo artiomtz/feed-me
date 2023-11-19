@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import RecipeContext from "../RecipeContext";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
-import Fade from "@mui/material/Fade";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, animate } from "framer-motion";
 
 export default function Status() {
   const { status, setStatus, loading } = useContext(RecipeContext);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    setInterval(() => {
       setStatus((prevQueue) => {
         if (prevQueue.length > 1) {
           const [msg, ...rest] = prevQueue;
@@ -20,20 +19,43 @@ export default function Status() {
     }, UI_SPEED);
   }, []);
 
+  useEffect(() => {
+    const status = document.getElementById("status");
+    animate(
+      status,
+      { opacity: [0.5, 0.9, 1, 0.9] },
+      { duration: UI_SPEED / 1000 }
+    );
+    animate(
+      status,
+      { scale: [0.7, 0.9, 1, 0.9] },
+      { duration: UI_SPEED / 1000 }
+    );
+  }, [status[0]]);
+
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.3 }}
-        animate={{ opacity: [0.5, 0.7, 1], scale: [0.7, 1, 0.7, 1, 1] }}
-        transition={{ duration: NUM_MSGS * (UI_SPEED / 1000) }}
-      >
-        <div className="status">{status[0]}</div>
+      <motion.div>
+        <div className="status">
+          <div id="status">{status[0]}</div>
+        </div>
       </motion.div>
       <Box sx={{ width: "100%" }}>
         <LinearProgress
           variant={loading ? "indeterminate" : "determinate"}
-          color="inherit"
           value={0}
+          sx={{
+            color: "cornsilk",
+            boxShadow: 5,
+            border: 3,
+            borderRadius: 5,
+            p: 1,
+
+            backgroundColor: "cornsilk",
+            "& .MuiLinearProgress-bar": {
+              backgroundColor: "lightblue",
+            },
+          }}
         />
       </Box>
     </>

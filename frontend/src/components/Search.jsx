@@ -1,17 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { fetchPossibleRecipes } from "../api/graphql/graphqlService";
 import RecipeContext from "../RecipeContext";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import Stack from "@mui/material/Stack";
 import Instructions from "./Instructions";
-import ButtonGo from "./ButtonGo";
 import ButtonBasics from "./ButtonBasics";
-import { motion, AnimatePresence } from "framer-motion";
+import ButtonGo from "./ButtonGo";
 import Grid from "@mui/material/Grid";
-import {
-  fetchTestRecipes,
-  fetchPossibleRecipes,
-} from "../api/graphql/graphqlService";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
 
 export default function Search() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
@@ -33,13 +29,8 @@ export default function Search() {
   const fetchRecipes = async () => {
     setLoading(true);
     pushStatus("Looking for recipes... 🫡");
-    let recipes = [];
 
-    if (DEBUG && !selectedIngredients.length) {
-      recipes = await fetchTestRecipes();
-    } else {
-      recipes = await fetchPossibleRecipes(selectedIngredients);
-    }
+    const recipes = await fetchPossibleRecipes(selectedIngredients);
     setRecipes(recipes);
 
     if (recipes.length) {
@@ -62,7 +53,6 @@ export default function Search() {
     ]);
     setSelectedIngredients(Array.from(newIngredients));
   };
-  // useEffect(() => {}, []);  😶🥲😯😖🤪
 
   return (
     <>
@@ -85,7 +75,10 @@ export default function Search() {
             handleHomeEndKeys
             filterSelectedOptions
             options={ingredients}
-            sx={{ width: "100%" }}
+            sx={{
+              boxShadow: 5,
+              borderRadius: 2,
+            }}
             onChange={handleIngredientChange}
             renderInput={(params) => (
               <TextField
