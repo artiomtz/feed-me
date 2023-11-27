@@ -6,7 +6,7 @@ Available at: [feed-me.onrender.com](https://feed-me.onrender.com/)
 
 ### Overview
 
-A modern fun and responsive web app that is based on React-Django-Redis. it can offer you culinary ideas based on what ingredients are available in your fridge. While featuring over 12,000 recipes with over 1,000 ingredients, and suggesting base ingredients, the app will showcase images, complete lists of ingredients, and detailed cooking instructions.
+A modern and responsive web app, built on React-Django-Redis, that enhances your culinary experience. Discover exciting recipes based on the ingredients in your fridge, with a unique matching threshold feature. With over 12,000 recipes, 1,000 ingredients, and helpful suggestions for base ingredients, the app provides images, comprehensive ingredient lists, and detailed cooking instructions.
 
 ## Front-end
 
