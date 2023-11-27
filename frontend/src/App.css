@@ -56,6 +56,11 @@ body {
   padding-bottom: 20px;
 }
 
+.slider {
+  padding: 5px;
+  padding-bottom: 10px;
+}
+
 .button {
   font-family: "Playpen Sans", "Verdana";
 }

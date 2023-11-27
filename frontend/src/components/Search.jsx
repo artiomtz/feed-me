@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { fetchPossibleRecipes } from "../api/graphql/graphqlService";
 import RecipeContext from "../RecipeContext";
 import Instructions from "./Instructions";
+import SliderBar from "./SliderBar";
 import ButtonBasics from "./ButtonBasics";
 import ButtonGo from "./ButtonGo";
 import Grid from "@mui/material/Grid";
@@ -18,6 +19,7 @@ export default function Search() {
     loading,
     setLoading,
     pushStatus,
+    slider,
   } = useContext(RecipeContext);
 
   const handleIngredientChange = (event, newIngredients) => {
@@ -28,7 +30,7 @@ export default function Search() {
     setLoading(true);
     pushStatus("Looking for recipes... 🫡");
 
-    const recipes = await fetchPossibleRecipes(selectedIngredients);
+    const recipes = await fetchPossibleRecipes(selectedIngredients, slider);
     setRecipes(recipes);
 
     if (recipes.length) {
@@ -86,6 +88,9 @@ export default function Search() {
             )}
           />
         </Stack>
+      </div>
+      <div className="slider">
+        <SliderBar />
       </div>
       <Grid
         container

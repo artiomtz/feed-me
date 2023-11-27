@@ -8,6 +8,9 @@ export function ContextProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState([]);
+  const [slider, setSlider] = useState(
+    parseFloat(SIMILARITY_THRESHOLD_DEFAULT)
+  );
 
   const pushStatus = (msg) => {
     setStatus((prevQueue) => [...prevQueue, msg]);
@@ -27,6 +30,8 @@ export function ContextProvider({ children }) {
         status,
         setStatus,
         pushStatus,
+        slider,
+        setSlider,
       }}
     >
       {children}

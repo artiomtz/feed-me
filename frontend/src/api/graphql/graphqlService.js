@@ -6,8 +6,11 @@ const client = new ApolloClient({
 });
 
 const GET_POSSIBLE_RECIPES = gql`
-  query PossibleRecipes($ingredients: [String]!) {
-    possibleRecipes(ingredients: $ingredients) {
+  query PossibleRecipes($ingredients: [String]!, $similarityThreshold: Float) {
+    possibleRecipes(
+      ingredients: $ingredients
+      similarityThreshold: $similarityThreshold
+    ) {
       title
       ingredients
       instructions
@@ -16,11 +19,11 @@ const GET_POSSIBLE_RECIPES = gql`
   }
 `;
 
-export async function fetchPossibleRecipes(ingredients) {
+export async function fetchPossibleRecipes(ingredients, similarityThreshold) {
   try {
     const { data } = await client.query({
       query: GET_POSSIBLE_RECIPES,
-      variables: { ingredients },
+      variables: { ingredients, similarityThreshold },
     });
     return data.possibleRecipes;
   } catch (error) {

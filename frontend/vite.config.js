@@ -22,6 +22,9 @@ export default defineConfig({
     MIN_INGREDIENTS: `"${process.env.MIN_INGREDIENTS}"`,
     UI_SPEED: `"${process.env.UI_SPEED}"`,
     NUM_MSGS: `"${process.env.NUM_MSGS}"`,
+    SIMILARITY_THRESHOLD_DEFAULT: `"${process.env.SIMILARITY_THRESHOLD_DEFAULT}"`,
+    SIMILARITY_THRESHOLD_MIN: `"${process.env.SIMILARITY_THRESHOLD_MIN}"`,
+    SIMILARITY_THRESHOLD_MAX: `"${process.env.SIMILARITY_THRESHOLD_MAX}"`,
   },
   plugins: [react(), resolve()],
   build: {
