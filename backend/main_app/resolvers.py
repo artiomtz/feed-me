@@ -4,10 +4,12 @@ from decouple import config
 import re
 
 
-RECIPE_SIMILARITY_THRESHOLD = float(config("RECIPE_SIMILARITY_THRESHOLD"))
 MAX_INGREDIENTS = int(config("MAX_INGREDIENTS"))
 MIN_INGREDIENTS = int(config("MIN_INGREDIENTS"))
 REDIS_TIMEOUT = int(config("REDIS_TIMEOUT"))
+SIMILARITY_THRESHOLD_DEFAULT = float(config("SIMILARITY_THRESHOLD_DEFAULT"))
+SIMILARITY_THRESHOLD_MIN = float(config("SIMILARITY_THRESHOLD_MIN"))
+SIMILARITY_THRESHOLD_MAX = float(config("SIMILARITY_THRESHOLD_MAX"))
 
 
 def resolve_recipe_by_id(self, info, recipe_id):
@@ -21,7 +23,7 @@ def clean_ingredient(ingredient):
     return re.sub(r"\[|\]|\'", "", ingredient).strip()
 
 
-def resolve_possible_recipes(self, info, ingredients):
+def resolve_possible_recipes(self, info, ingredients, similarity_threshold):
     cleaned_ingredients = sorted(
         {clean_ingredient(ingredient) for ingredient in ingredients}
     )
@@ -35,8 +37,15 @@ def resolve_possible_recipes(self, info, ingredients):
         )
         return []
 
+    if (
+        similarity_threshold < SIMILARITY_THRESHOLD_MIN
+        or similarity_threshold > SIMILARITY_THRESHOLD_MAX
+    ):
+        similarity_threshold = SIMILARITY_THRESHOLD_DEFAULT
+        print(f"Setting default similarity threshold: {SIMILARITY_THRESHOLD_DEFAULT}")
+
     try:
-        cache_key = "feed-me:" + ",".join(cleaned_ingredients)
+        cache_key = f"feed-me:{','.join(cleaned_ingredients)}.[{similarity_threshold}]"
         cached_ids = redis_cache.get_cached_data(cache_key)
         if cached_ids is not None:
             filtered_recipes = Recipe.objects.filter(id__in=cached_ids)
@@ -45,7 +54,7 @@ def resolve_possible_recipes(self, info, ingredients):
     except:
         print("Couldn't retrieve data from Redis")
 
-    filtered_recipes = search_recipes(set(cleaned_ingredients))
+    filtered_recipes = search_recipes(set(cleaned_ingredients), similarity_threshold)
     print(f"Found {len(filtered_recipes)} matching recipes")
 
     try:
@@ -57,7 +66,7 @@ def resolve_possible_recipes(self, info, ingredients):
     return filtered_recipes
 
 
-def search_recipes(cleaned_ingredients):
+def search_recipes(cleaned_ingredients, similarity_threshold):
     filtered_recipes = []
     all_recipes = Recipe.objects.all()
 
@@ -71,7 +80,7 @@ def search_recipes(cleaned_ingredients):
             cleaned_ingredients.intersection(recipe_ingredients)
         ) / len(recipe_ingredients)
 
-        if similarity_score >= RECIPE_SIMILARITY_THRESHOLD:
+        if similarity_score >= similarity_threshold:
             filtered_recipes.append(recipe)
 
     return filtered_recipes
