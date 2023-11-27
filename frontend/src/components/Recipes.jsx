@@ -38,7 +38,7 @@ export default function Recipes() {
         {recipes.length ? (
           recipes.map((recipe) => (
             <motion.div
-              key={recipe.imageName}
+              key={recipe.title + "-" + recipe.imageName}
               layout
               initial={{ opacity: 0.8, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
